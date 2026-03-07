@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Movie List - Q4 First Graded Exercise</title>
+<title>Movie List - Q4 Second Graded Exercise</title>
 
 <style>
 body{
@@ -51,7 +51,7 @@ input,select{
 }
 
 .star.selected{
-    color: yellow;
+    color:yellow;
 }
 
 button{
@@ -81,10 +81,20 @@ button:hover{
     border-radius:4px;
     font-size:13px;
 }
+
+.movieItem button{
+    width:auto;
+    padding:4px 8px;
+    font-size:11px;
+    margin-top:5px;
+    background:#601515;
+}
+
 .movieItem .star{
     font-size:18px;
     color:#ccc;
 }
+
 .movieItem .star.selected{
     color:yellow;
 }
@@ -95,14 +105,16 @@ button:hover{
 
 <div class="container">
 
-<h2>Add a Movie</h2>
+<h2>Add / Update a Movie</h2>
 
 <form id="movieForm">
 
 <label>Title:</label>
 <input type="text" id="title" required>
+
 <label>Year:</label>
 <input type="text" id="year" required>
+
 <label>Genre:</label>
 <select id="genre" required>
 <option>Action</option>
@@ -134,12 +146,16 @@ button:hover{
 </div>
 
 <script>
+
+// 1. Showcases important HTML elements (form, movie list container, and star rating elements)
 const form = document.getElementById("movieForm");
 const movieList = document.getElementById("movieList");
 const stars = document.querySelectorAll("#starContainer .star");
+
 let rating = 0;
 
 
+// 2. Detects when the user clicks a star and stores the user's rating
 stars.forEach(star=>{
     star.addEventListener("click", ()=>{
         rating = Number(star.dataset.value);
@@ -147,9 +163,11 @@ stars.forEach(star=>{
     });
 });
 
-function updateStars(rating){
+
+// 3. Updates appearance of stars based on user's rating
+function updateStars(value){
     stars.forEach(star=>{
-        if(Number(star.dataset.value) <= rating){
+        if(Number(star.dataset.value) <= value){
             star.classList.add("selected");
         } else{
             star.classList.remove("selected");
@@ -158,54 +176,109 @@ function updateStars(rating){
 }
 
 
+// 4. Displays all movies stored in localStorage
 function displayMovies(){
+
     movieList.innerHTML="";
+
     const movies = JSON.parse(localStorage.getItem("movies")) || [];
-    movies.forEach(movie=>{
+
+    movies.forEach((movie,index)=>{
+
         const div = document.createElement("div");
         div.classList.add("movieItem");
 
-        let starHtml = "";
-        for(let i=1; i<=5; i++){
+        let starHtml="";
+
+        // 5. Generates star display for each movie
+        for(let i=1;i<=5;i++){
             if(i <= movie.rating){
                 starHtml += '<span class="star selected">★</span>';
-            } else{
+            }else{
                 starHtml += '<span class="star">★</span>';
             }
         }
 
         div.innerHTML = `
-            <strong>${movie.title}</strong> (${movie.year}) - ${movie.genre} <br>
-            Rating: ${starHtml}
+        <strong>${movie.title}</strong> (${movie.year}) - ${movie.genre}<br>
+        Rating: ${starHtml}<br>
+        <button onclick="deleteMovie(${index})">Delete</button>
         `;
+
         movieList.appendChild(div);
     });
+
 }
 
 
+// 6. Handles form submission to add new movie or update the existing one
 form.addEventListener("submit", function(e){
+
     e.preventDefault();
+
     const title = document.getElementById("title").value.trim();
     const year = document.getElementById("year").value.trim();
     const genre = document.getElementById("genre").value;
 
-    if(!title || !year || !genre || rating===0){
-        alert("Fill all fields and select a rating!");
+    if(!title || !year || rating===0){
+        alert("Fill all fields and select rating");
         return;
     }
 
-    const movie = {title, year, genre, rating};
-    const movies = JSON.parse(localStorage.getItem("movies")) || [];
-    movies.push(movie);
+    let movies = JSON.parse(localStorage.getItem("movies")) || [];
+    const existingIndex = movies.findIndex(
+        movie => movie.title.toLowerCase() === title.toLowerCase()
+    );
+
+    if(existingIndex !== -1){
+
+        const oldRating = movies[existingIndex].rating;
+        const newRating = Math.round((oldRating + rating) / 2);
+
+        movies[existingIndex] = {
+            title,
+            year,
+            genre,
+            rating:newRating
+        };
+
+    }else{
+        movies.push({title,year,genre,rating});
+    }
+
     localStorage.setItem("movies", JSON.stringify(movies));
 
     form.reset();
-    rating = 0;
+    rating=0;
     updateStars(0);
+
     displayMovies();
+
 });
 
+
+// 7. Deletes movie after confirming with user
+function deleteMovie(index){
+
+    const confirmDelete = confirm("Are you sure you want to delete this movie?");
+
+    if(confirmDelete){
+
+        let movies = JSON.parse(localStorage.getItem("movies")) || [];
+
+        movies.splice(index,1);
+
+        localStorage.setItem("movies", JSON.stringify(movies));
+
+        displayMovies();
+    }
+
+}
+
+
+// 8. Shows saved movies when page opens
 displayMovies();
+
 </script>
 
 </body>
