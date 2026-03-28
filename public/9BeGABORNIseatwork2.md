@@ -56,24 +56,24 @@
 - Add in css ```position: relative; top: 20px; left: 20px;``` to .sidebar.
 
 - Guided Question: What changed compared to the default static positioning? Try to give different values to top and left or you can change it to bottom, right.
+- The box moved from its original position. It shifted downward and to the right but its original space remained the same.
 
-- The box was sent to the front and the words beneath were now placed behind. The box also shifted downward. 
 
 ### Step 2 (Fixed):
 
 - Add in css ```position: fixed; bottom: 0; width: 100%;``` to .footer.
 
 - Guided Question: What happens when you scroll the page? Why does the footer behave differently from position relative?
+- The footer stayed at the bottom even when I scrolled the page. It's because the fixed position sticks to the screen unlike relative.
 
-- The yellow main content box now appeared beside the side bar green box.
 
 ### Step 3 (Absolute):
 
 - Add in css ```position: absolute; top: 66px; left: 200px;``` to .content.
 
 - Guided Question: What is the effect of position: absolute on an element? How is it different from fixed?
+- "position: absolute" places the element based on its nearest parent. It's different from fixed because fixed stays in place even when scrolling.
 
-- position: absolute positions it the nearest  box, while position: fixed positions the element to the website, so it stays in the same place even when scrolled.
 
 ### Step 4 : (Absolute)
 
@@ -93,27 +93,29 @@
 - Give .content a z-index: 1.
 
 - Guided Question: Why does the notice appear on top of the content? What happens if you swap the z‑index values?
-
-- The notice appears on top because it has a higher z-index. When you swap the z-index values, the elements will overlap.
+- The notice appears on top because it has a higher z-index. When I swapped the z-index, the content went to the top.
 
 - Challenge: 
     * What changes that you have to do on the code that will position .notice box on the top right corner of the .content box? Please write the code on paper as well (both html and css on the part of .notice and .content).
-
-    - 
+    - .content to position: relative 
+    - .notice to position: absolute; top: 0; right: 0;
 
     * Try to change the position of .content to relative then to fixed. What do you observed each time?
+    - The notice stays inside the content box when relative is used. On the other hand, when fixed is applied, the content stays on screen and overlaps.
 
-    - 
     * What do you observe on about the effect of z-index on .notice and .content boxes?
-
-    -
+    - Higher z-index makes it appear in the front while a lower z-index makes it go behind the other elements.
 
 3. Please answer the following reflection questions (15 minutes)
 
     a. Could you summarize the differences between the CSS position values (static, relative, absolute, fixed)? 
+    - Static does not move and relative moves from its place while absolute uses parent, and fixed stays on screen.
 
     b. How does absolute positioning depend on its parent element?
+    - It depends on the nearest parent with position. If there is no parent with position, it'll use the whole page.
 
     c. How do you differentiate sticky from fixed (you can research on sticky)?
+    - Sticky moves when you scroll and sticks at one point while fixed always stays on screen.
 
     d. If you were designing a webpage for a school event, how might you use positioning to highlight important information? Please give concrete examples.
+    - I can use positioning to highlight important parts of the webpage, like placing a “Register Now” button on top of a section. I can also fix information I would want to highlight so it would stay in place even while scrolling.
