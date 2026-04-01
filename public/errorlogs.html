@@ -1,174 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="author" content="Sandrine Anne V. Gaborni & Rafaela M. Yatco">
-<meta name="description" content="Nlogonia coordinate plotting">
-<title>Sandrine Anne V. Gaborni & Rafaela M. Yatco / 9-Beryllium March 31, 2026</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="author" content="Gaborni, Yatco" />
+  <meta name="description" content="testing and debugging">
+  <meta name="keywords" content="testing and debugging">
+  <title>CS3 </title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@300&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 
-<style>
-html {
-  height: 100%;
-  width: 100%;
-}
-
-body{
-  font-family: 'Roboto', 'Poppins', 'Open Sans', sans-serif;
-  background-color: cornsilk;
-  color: royalblue;
-  padding: 0;
-  margin: 0;
-}
-
-section, header {
-  padding-left: 2%;
-}
-
-
-nav {
-  width: 100%;
-  background-color: #333;
-}
-
-nav a {
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 20px;
-  text-decoration: none;
-}
-
-
-nav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-
-#coordinatePlane {
-  position: relative;
-  height: 400px;
-  width: 400px;
-  border: 1px solid black;
-}
-
-.point {
-  position: absolute;
-  height: 10px;
-  width: 10px;
-  background-color: red;
-}
-
-.axis {
-  position: absolute;
-  background-color: black;
-}
-
-#xAxis {
-  left: 0;
-  top: 200px;
-  width: 100%;
-  height: 1px;
-}
-
-#yAxis {
-  left: 200px;
-  bottom: 0;
-  width: 1px;
-  height: 100%;
-}
-
-
-footer {
-  width: 100%;
-  background-color: white;
-  color: #333;
-  text-align: center;
-  padding: 10px 0;
-}
-
-footer a {
-  text-decoration: none;
-}
-
-.icon {
-  width: 32px;
-  height: 32px;
-  display: inline-block;
-  background: url('sprites.png') no-repeat;
-}
-
-.facebook { background-position: -226px -129px; }
-.twitter { background-position: -340px -129px; }
-.github { background-position: -456px -129px; }
-
-.facebook:hover { background-position: -226px -55px; }
-.twitter:hover { background-position: -340px -54px; }
-.github:hover { background-position: -456px -54px; }
-
-
-table{
-  border-collapse: collapse;
-}
-
-th, td{
-  padding: 5px;
-  border: 1px solid #333;  
-}
-
-.rColor {
-  background-color: navy;
-  color: white;
-}
-</style>
+  <style>
+    tr:nth-child(1) ~ tr:nth-child(odd) {
+      background-color: lightgray;
+      color: black;
+    }
+    td, th {
+      padding: 10px;
+    }
+    table {
+      width: 90%;
+      margin: 0 auto;
+    }
+    caption {
+      font-size: 2em;
+      font-weight: bold;
+      padding: 10px;
+    }
+    
+  </style>
 </head>
 
 <body>
+  <header>
+    <nav>
+      <a href="index.html#start">Table</a>
+      <a href="index.html#input">Input</a>
+      <a href="index.html#output">Output</a>
+    </nav>
+    
+    <h1 style="padding: 30px">Sandrine Anne V. Gaborni & Rafaela M. Yatco / 9-Beryllium March 31, 2026 </h1>
+  </header>
 
-<header>
-  <nav>
-    <a href="#table">Table</a>
-    <a href="#input">Input</a>
-    <a href="#output">Output</a>
-  </nav>
-  <h1>Sandrine Anne V. Gaborni & Rafaela M. Yatco / 9-Beryllium March 31, 2026</h1>
-</header>
-
-<section id="input">
-  <h2>Plot Residence</h2>
-
-  Division Point (x0, y0): 
-  <input type="number" id="x0"> , 
-  <input type="number" id="y0"><br><br>
-
-  Residence (x, y): 
-  <input type="number" id="x"> , 
-  <input type="number" id="y"><br><br>
-
-  <button onclick="plotPoint()">Plot</button>
-
-  <div id="in1"></div>
-  <div id="out1" style="font-weight:bold;"></div>
-
-  <div id="coordinatePlane">
-    <div id="xAxis" class="axis"></div>
-    <div id="yAxis" class="axis"></div>
-  </div>
-</section>
-
-<section id="table">
-  <table>
-    <caption><b>Error Logs</b></caption>
-
-    <tr class="rColor">
-      <th>Item#</th> 
-      <th>Code line# CSS/JS</th> 
-      <th>Description</th>
-      <th>Correction Done</th>
-    </tr>
-
-  <tr><td>1</td><td>JS</td><td>point.styleleft invalid</td><td>Changed to point.style.left</td></tr>
+  <section id="table">
+    <table> 
+      <caption> Error Logs - place errors found in the table below</caption>
+      <tr class="rColor">
+        <th> item# </th> 
+        <th> code line#<br/>CSS or JS </th> 
+        <th> Description</th>
+        <th> Correction Done</th>
+      </tr>
+      
+      <tr><td>1</td><td>JS</td><td>point.styleleft invalid</td><td>Changed to point.style.left</td></tr>
   <tr><td>2</td><td>JS</td><td>point.stylebottom invalid</td><td>Changed to point.style.bottom</td></tr>
   <tr><td>3</td><td>JS</td><td>in1/out1 undefined</td><td>Added getElementById references</td></tr>
   <tr><td>4</td><td>JS</td><td>Input values treated as strings</td><td>Used parseInt() on inputs</td></tr>
@@ -178,54 +65,25 @@ th, td{
   <tr><td>8</td><td>CSS</td><td>nav a:hover selector was incorrect</td><td>Changed from nav a :hover to nav a:hover</td></tr>
   <tr><td>9</td><td>CSS</td><td>.point missing position</td><td>Added position:absolute to .point</td></tr>
   <tr><td>10</td><td>CSS</td><td>Footer icons not displaying background</td><td>Added background: url('sprites.png') no-repeat to .icon</td></tr>
-
-  </table>
-</section>
-
-<footer>
-  <a href="https://facebook.com"><span class="icon facebook"></span></a>
-  <a href="https://twitter.com"><span class="icon twitter"></span></a>
-  <a href="https://github.com"><span class="icon github"></span></a>
-</footer>
-
-<script>
-function plotPoint() {
-
-  var x0 = parseInt(document.getElementById('x0').value);
-  var y0 = parseInt(document.getElementById('y0').value);
-  var x = parseInt(document.getElementById('x').value);
-  var y = parseInt(document.getElementById('y').value);
-
-  var in1 = document.getElementById('in1');
-  var out1 = document.getElementById('out1');
-
-  in1.innerHTML = x0 + " " + y0 + " " + x + " " + y;
-
-  var point = document.createElement('div');  
-  point.className = 'point';
-
-  point.style.left = (x - x0 + 200 - 5) + 'px';
-  point.style.bottom = (y - y0 + 200 - 5) + 'px';
-
-  document.getElementById('coordinatePlane').appendChild(point);
-
-  if (x === x0 || y === y0){
-    out1.innerHTML = "divisa";
-  }
-  else if (x > x0 && y > y0){
-    out1.innerHTML = "NE";
-  }
-  else if (x < x0 && y > y0){
-    out1.innerHTML = "NO";
-  }
-  else if (x > x0 && y < y0){
-    out1.innerHTML = "SE";
-  }
-  else if (x < x0 && y < y0){
-    out1.innerHTML = "SO";
-  }
-}
-</script>
-
+     
+    </table>
+    <hr>
+  </section>
+  
+   
+  <!--- anchors for socmed site are done with image sprites -->
+  <footer>
+    <a href="https://facebook.com"> 
+    <div class="icon facebook"></div>
+    </a>
+    <a href="https://twitter.com">
+    <div class="icon twitter"></div>
+    </a>
+    <a href="https://github.com">
+    <div class="icon github"></div>
+    </a>
+  </footer>
+ 
 </body>
+
 </html>
